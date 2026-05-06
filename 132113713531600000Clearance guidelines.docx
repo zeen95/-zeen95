@@ -1,0 +1,664 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1"><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /><meta http-equiv="pragma" content="no-cache" /><title>
+	CUOnline - Administration 
+</title>
+    <!--                       CSS                       -->
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="../resources/css/cuonline.all.css" type="text/css" media="screen" /><link href="../resources/jqueryUI/themes/redmond/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+    
+    <!-- Internet Explorer Fixes Stylesheet -->
+    <!--[if lte IE 7]>
+			<link rel="stylesheet" href="../resources/css/cuonline.all.ie.css" type="text/css" media="screen" />
+		<![endif]-->
+    <!--                       Javascripts                       -->
+    <!-- jQuery -->
+
+    <script type="text/javascript" src='/resources/jqueryUI/jquery-1.5.1.js'></script>
+
+    <!-- jQuery Configuration -->
+
+    <script type="text/javascript" src='/resources/scripts/simpla.jquery.configuration.js'></script>
+
+    <!-- Facebox jQuery Plugin -->
+
+    <script type="text/javascript" src='/resources/scripts/facebox.js'></script>
+    <script type="text/javascript" src='/CommonFolder/ECharts.js'></script>
+
+    <!-- jQuery WYSIWYG Plugin -->
+
+    <script type="text/javascript" src='/resources/scripts/jquery.wysiwyg.js'></script>
+
+    <!-- Internet Explorer .png-fix -->
+    <!--[if IE 6]>
+			<script type="text/javascript" src='/resources/scripts/DD_belatedPNG_0.0.7a.js'></script>
+			<script type="text/javascript">
+				DD_belatedPNG.fix('.png_bg, img, li');
+			</script>
+		<![endif]-->
+    <!-----jquery UI Elements ---->
+
+    <script src='/resources/jqueryUI/ui/jquery-ui-1.8.11.custom.js'
+        type="text/javascript"></script>
+
+    <script src='/resources/jqueryUI/ui/jquery.ui.core.js' type="text/javascript"></script>
+
+    <script src='/resources/jqueryUI/ui/jquery.ui.datepicker.js'
+        type="text/javascript"></script>
+
+    <script type="text/javascript" src='/resources/jqueryUI/jconfirmaction.jquery.js'></script>
+
+    <script type="text/javascript" src='/resources/jqueryUI/jquery.watermark.js'></script>
+
+    <script type="text/javascript" src='/resources/jqueryUI/CUOnline_Common.js'></script>
+
+    
+
+
+    <script type="text/javascript">
+
+
+        function load() {
+            //Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
+        }
+
+        function EndRequestHandler() {
+
+            //========confirmation
+
+            $(function ($) {
+                $('.ask').jConfirmAction();
+            });
+
+            ///==========watermark
+            $(function () {
+                $('.watermarked').watermark('watermark');
+
+            });
+
+            //========datetpicker
+            $(function () {
+
+                $("input[id$=Date]").datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    showOn: 'both',
+                    buttonImage: '/resources/images/calendar.gif',
+                    buttonImageOnly: false,
+                    gotoCurrent: true,
+                    dateFormat: 'dd/mm/yy',
+                    closeText: 'Done'
+                });
+            });
+
+        }
+    </script>
+
+    <style type="text/css">
+        #progressBackgroundFilter {
+            position: fixed;
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+            background-color: #000;
+            filter: alpha(opacity=50);
+            opacity: 0.5;
+            z-index: 1000;
+            height: 100%;
+        }
+
+        #processMessage {
+            position: fixed;
+            top: 200px;
+            left: 43%;
+            padding: 10px;
+            width: 14%;
+            z-index: 1001;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .ddlClass {
+            font-size: 18px;
+            height: 30px;
+            line-height: 30px;
+            width: 100px; /*scrollbar-face-color: #FFCCCC;
+        scrollbar-highlight-color: #4B4B4B;
+        scrollbar-3dlight-color: #646464;
+        scrollbar-darkshadow-color: #969696;
+        scrollbar-shadow-color: #C0C0C0;
+        scrollbar-arrow-color: #090925;
+        scrollbar-track-color: #051011;*/
+        }
+
+        .pgr {
+            background: #424242 url(grd_pgr.png) repeat-x top;
+        }
+
+            .pgr table {
+                margin: 5px 0;
+            }
+
+            .pgr td {
+                border-width: 0;
+                padding: 0 6px;
+                border-left: solid 1px #666;
+                font-weight: bold;
+                color: #fff;
+                line-height: 12px;
+            }
+
+            .pgr a {
+                color: #666;
+                text-decoration: none;
+            }
+
+                .pgr a:hover {
+                    color: #000;
+                    text-decoration: none;
+                }
+    </style>
+</head>
+<body onload="load()">
+    <form method="post" action="./DownloadFile.aspx?fileID=13" id="MasterForm" class="form">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJNDMyNDU0NjAzD2QWAmYPZBYCAgMPZBYCAgEPZBY6AgEPDxYCHgRUZXh0BRBaZWVuYXQgWnVsZmlxYXIgZGQCAw8PFgIeC05hdmlnYXRlVXJsBd0BaHR0cDovL2lzcHAuY29tc2F0cy5lZHUucGsvaG9tZS9zZXR1cD9DYW1wdXNOYW1lPUFiYm90dGFiYWQmRmFjdWx0eUlEPTI1MjAmRmFjdWx0eU5hbWU9WmVlbmF0IFp1bGZpcWFyICZGYWN1bHR5RGVwYXJ0bWVudE5hbWU9Q29tcHV0ZXIgU2NpZW5jZSZGYWN1bHR5Um9sZT1UZWFjaGVyJkVtYWlsPXplZW5hdHp1bGZpcWFyQGN1aWF0ZC5lZHUucGsmUGhvbmU9MDM0OTkxNzk1NTYmYml0PTFkZAIEDw8WAh8BBd0BaHR0cDovL2lzcHAuY29tc2F0cy5lZHUucGsvaG9tZS9zZXR1cD9DYW1wdXNOYW1lPUFiYm90dGFiYWQmRmFjdWx0eUlEPTI1MjAmRmFjdWx0eU5hbWU9WmVlbmF0IFp1bGZpcWFyICZGYWN1bHR5RGVwYXJ0bWVudE5hbWU9Q29tcHV0ZXIgU2NpZW5jZSZGYWN1bHR5Um9sZT1UZWFjaGVyJkVtYWlsPXplZW5hdHp1bGZpcWFyQGN1aWF0ZC5lZHUucGsmUGhvbmU9MDM0OTkxNzk1NTYmYml0PTBkZAIZD2QWAmYPFgIeB1Zpc2libGVoZAI6DxYEHgVzdHlsZQUMZGlzcGxheTpub25lHwJoZAI7DxYEHwMFDGRpc3BsYXk6bm9uZR8CaGQCPA8WBB8DBQxkaXNwbGF5Om5vbmUfAmhkAlMPFgIfAwUMZGlzcGxheTpub25lZAJUDxYEHwMFDGRpc3BsYXk6bm9uZR8CaGQCVw8WBB8DBQxkaXNwbGF5Om5vbmUfAmhkAlgPFgQfAwUMZGlzcGxheTpub25lHwJoZAJaDxYCHwMFDGRpc3BsYXk6bm9uZWQCXQ8WBB8DBQxkaXNwbGF5Om5vbmUfAmhkAl4PFgQfAwUMZGlzcGxheTpub25lHwJoZAJfDxYEHwMFDGRpc3BsYXk6bm9uZR8CaGQCYA8WBB8DBQxkaXNwbGF5Om5vbmUfAmhkAmEPFgQfAwUMZGlzcGxheTpub25lHwJoZAJlDxYCHwMFDGRpc3BsYXk6bm9uZWQCZg9kFg4CAg8WAh4EaHJlZgUBI2QCBA8WAh8EBQEjZAIGDxYCHwQFASNkAggPFgIfBAUBI2QCCg8WAh8EBQEjZAIMDxYCHwQFASNkAg4PFgIfBAUBI2QCbA8WAh8DBQxkaXNwbGF5Om5vbmVkAm0PFgIfAwUMZGlzcGxheTpub25lZAJwDxYCHwMFDGRpc3BsYXk6bm9uZWQCcQ8WAh8DBQxkaXNwbGF5Om5vbmVkAnIPFgIfAwUMZGlzcGxheTpub25lZAJzDxYCHwMFDGRpc3BsYXk6bm9uZWQCdA8WAh8DBQxkaXNwbGF5Om5vbmVkAngPFgIfAmhkAnkPFgQfAwUMZGlzcGxheTpub25lHwJoZAJ6Dw8WAh8CaGRkZNr7uO2YN7QNYhqv+yCV0TNbEp5Enq9ykIpgCsluCfC6" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['MasterForm'];
+if (!theForm) {
+    theForm = document.MasterForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=99tkrGA0zNqY9dOlWEK7nT2ntiSDEBhPbg5qKRq0XJUpwCl3v_qXadXKKE-GoaO_mN9_BPCvwXR6J4gX5Vz4TKjA9COMNhMUP6LZkoDN4Ow1&amp;t=638901721900000000" type="text/javascript"></script>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="A8D1E65D" />
+	<input type="hidden" name="__PREVIOUSPAGE" id="__PREVIOUSPAGE" value="GwUMYOU_9lcBj5xPrORZ0WBN0HlGyJGD3-e4u9EzwnE5-hv3YacKjjqMrtFY-RF5ssHhof_gPj2lbknlKrbqghdVjRwl7tuqk5PIQsSOv3VG2jYo91-0Vqwj4BZqscfJ0" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAArf7KtBNCQWgefwF45HNhCvAwABrNP79YzBlFB3vUuHjsShDttF8q1jLd6uxb6gq+eKjjSU4/KQguevQ10S7s1SnaNwMUzKOA6Flw3IVz2xWJNL7dsCZlIMi6TmsDb0ekH3uQ5ejpdZwJUf8YE/OdTpOgJ4wxOZV99aq3yPfCi0s5vr4rs5HBkP0wS8LO9iiXV2daqtHf4uoKZ4nyplO55sEIdz5+cI4wXd+brVOjjS0QLWy3W5oAj8HPUHpchsrzY=" />
+</div>
+        <div id="main">
+            <div id="body-wrapper">
+                <!-- Wrapper for the radial gradient background -->
+                <div id="sidebar">
+                    <div id="sidebar-wrapper">
+                        <!-- Sidebar with logo and menu -->
+                        <!-- Logo (221px wide) -->
+                        <center>
+                            <a href="#">
+                                <img id="logo" src='/resources/images/CIITLogo_Plain.png' alt="Comsats logo"
+                                    width="100px" height="90px" /></a>
+                        </center>
+                        <!-- Sidebar Profile links -->
+                        <div id="profile-links">
+                            <span id="Label1" style="font-size:10pt;">Welcome,</span>
+                            <a href="#">
+                                <span id="lbl_Name" style="font-size:10pt;">Zeenat Zulfiqar </span></a><br />
+                            <br />
+                            
+                            <a href="../FacultyManual.zip" style="font-size: 9pt; color: Yellow">Download User Manual&nbsp;&nbsp;&nbsp;</a>
+                            <a id="lnk_Signout" href="javascript:__doPostBack(&#39;ctl00$lnk_Signout&#39;,&#39;&#39;)" style="font-size: 10pt">Sign 
+                        Out</a><br />
+                            
+                            <a id="lnkPHDFaculty" href="http://ispp.comsats.edu.pk/home/setup?CampusName=Abbottabad&amp;FacultyID=2520&amp;FacultyName=Zeenat Zulfiqar &amp;FacultyDepartmentName=Computer Science&amp;FacultyRole=Teacher&amp;Email=zeenatzulfiqar@cuiatd.edu.pk&amp;Phone=03499179556&amp;bit=1" target="_blank">Performa for PhD Faculty</a><br />
+                            <a id="lnkNonPHDFaculty" href="http://ispp.comsats.edu.pk/home/setup?CampusName=Abbottabad&amp;FacultyID=2520&amp;FacultyName=Zeenat Zulfiqar &amp;FacultyDepartmentName=Computer Science&amp;FacultyRole=Teacher&amp;Email=zeenatzulfiqar@cuiatd.edu.pk&amp;Phone=03499179556&amp;bit=0" target="_blank">Performa for Non-PhD Faculty</a>
+                        </div>
+                        <ul id="main-nav">
+                            <!-- Accordion Menu -->
+                            <li><a href="../Faculty/HomePage.aspx" id="lnk_Home" class="nav-top-item no-submenu">Home</a> </li>
+                            <li><a id="lnkCTSMain" class="nav-top-item">Online Testing
+                            System</a>
+                                <ul>
+                                    <li><a href="../CTS/AddSingleQuestion.aspx" id="lnkSingleQuestion">Add
+                                    Single Question</a></li>
+                                    <li><a href="../CTS/ViewQuestionsByCourse.aspx" id="lnkViewMCQs">View Questions</a></li>
+                                    <li><a href="../CTS/ImportFromOtherCourse.aspx" id="lnkImportFromCourse">Import (From Course)</a></li>
+
+                                    <li><a href="../CTS/GeneratePaper.aspx" id="lnkGeneratePaper">Add MCQ Test</a></li>
+                                    <li><a href="../Faculty/Portal/AddAssignment.aspx?isTest=1" id="lnkSubjectiveTest">Add Subjective Test</a></li>
+                                    <li><a href="../CTS/TestsSummaryByCourse.aspx" id="lnkTests">MCQ Tests</a></li>
+                                    <li><a href="../Faculty/Portal/PortalSummary.aspx?isTest=1" id="lnkSubjectiveTestsSummary">Subjective Tests</a></li>
+                                    <li><a href="../CTS%20User%20Manual.pdf" id="lnkUManualTest" target="_blank">User Manual</a></li>
+                                </ul>
+                            </li>
+                            <li><a id="lnk_Attendance" class="nav-top-item">Student Attendance</a>
+                                <ul>
+                                    <li><a href="../CoordinationOffice/AddAttendanceOld.aspx" id="lnkAddAttendance">Add Attendance</a></li>
+                                    <li><a href="../CoordinationOffice/ModifyAttendance.aspx" id="lnkModifyAttendance">Modify Attendance</a></li>
+                                    <li><a href="../Faculty/DeleteAttendance.aspx" id="lnkDeleteAttendance">Delete Attendance</a></li>
+                                    <li><a href="../Faculty/AttendanceOverview.aspx" id="lnkAttendanceOverview">Attendance
+                                    Overview</a></li>
+                                    <li><a href="../Faculty/LecturesOverview.aspx" id="lnkLecturesOverview">Lectures
+                                    Overview</a></li>
+                                </ul>
+                            </li>
+							
+							 <li><a id="lnkEFSForms" class="nav-top-item">EFS Applcation Forms</a>
+                                    <ul>
+                                         <li><a href="../Officers/EFS_ApplcationFormGuideline.aspx" id="lnkFormsGuidline" target="_blank">Application Guidelines</a> </li>
+                                        
+                                        <li><a href="../Officers/EFS_ApplicationForms.aspx" id="lnkForms">EFS Application Forms</a> </li>
+                                        
+                                    </ul>
+                                </li>
+
+                            <li id="lstFacultyCV"><a id="lnkCvMain" class="nav-top-item">CV
+                            </a>
+                                <ul>
+                                    <li><a href="../Faculty/CV/PersonalInformation.aspx" id="lnkCvPersonalInformation">Personal Information</a></li>
+                                    <li><a href="../Faculty/CV/ManageExperience.aspx" id="lnkCvExperience">Experience</a></li>
+                                    <li><a href="../Faculty/CV/ManageAchievement.aspx" id="lnkCvAchievement">Honors & Awards</a></li>
+                                    <li><a href="../Faculty/CV/ManageMembership.aspx" id="lnkMemberships">Memberships</a></li>
+                                    <li><a href="../Faculty/CV/ManageServiceActivity.aspx" id="lnkServiceActivities">Service Activities</a></li>
+                                    <li><a href="../Faculty/CV/ManageResearchInterest.aspx" id="lnkResearchInterests">Research Interests</a></li>
+                                    <li><a href="../Faculty/CV/ManageCreativeAccomplishment.aspx" id="lnkAccomplishments">Creative Accomplishments</a></li>
+                                    <li><a href="../Faculty/CV/ManageProfessionalPresentation.aspx" id="lnkProfessionalPresentations">Professional Presentations</a></li>
+                                    <li><a href="../Faculty/CV/PrintCv.aspx" id="lnkPrintCv" target="_blank">Print Cv</a></li>
+                                </ul>
+                            </li>
+
+
+                            <li id="lstFacultyFBSurvey">
+                                <ul>
+                                    <li><a href="../QEC/FacultyFeedBackSurvey.aspx" id="A5" target="_blank">Faculty Survey by QEC</a></li>
+
+                                </ul>
+                            </li>
+
+
+                            
+                            
+                            <li><a id="lnkSemesterPorforma" class="nav-top-item">Semester Course
+                            Outline </a>
+                                <ul>
+
+                                    <li><a href="../Faculty/SemesterLectureProforma.aspx" id="lnkLectureProforma">Add / Edit Fresh Outline</a></li>
+                                    <li><a href="../Faculty/CopyCourseOutline.aspx" id="lnkCopyLectureProforma">Import Course Outline Previous Semesters</a></li>
+
+                                    <li><a href="../Faculty/PreviousCourseOutLines.aspx" id="lnkPreviousLectureProforma">All Outlines Previous Semesters</a></li>
+
+                                    <li><a href="../Faculty/CourseCoverageReport.aspx" id="lnkCourseCoverageRpt">Course Coverage All Courses</a></li>
+
+                                    <li><a href="../Faculty/CourseCoverageProgress.aspx" id="lnkCourseCoverageProgress">Course Coverage Progress Details</a></li>
+
+                                    <li><a href="../Faculty/LectureWiseTimeReport.aspx" id="lnkCourseCoverageTopicWise">Time Spent Topic Wise</a></li>
+
+                                </ul>
+                            </li>
+                            <li><a id="lnk_Marks" class="nav-top-item">Marks</a>
+                                <ul>
+                                    <li><a href="../Faculty/MarksSummary.aspx?m=1" id="lnkSummary1">View Marks</a></li>
+                                    <li><a href="../Faculty/AddMarks.aspx" id="lnkAddMarks">Add Marks</a></li>
+                                    <li><a href="../Faculty/ModifyMarks.aspx" id="lnkModifyMarks">Modify Marks</a></li>
+                                    <li><a href="../Faculty/ChangeMarksType.aspx" id="lnkChageType">Change Marks Type</a></li>
+                                    <li><a href="../Faculty/QAMarksDeadLines.aspx" id="lnkDeadlines">Marks Deadlines</a></li>
+                                </ul>
+                            </li>
+                            <li><a id="lnkOBEMarks" class="nav-top-item">OBE Marks</a>
+                                <ul>
+                                    <li><a href="../Faculty/OBEMarksSummary.aspx" id="lnkViewOBEMarks">View OBE Marks</a></li>
+                                    <li><a href="../Faculty/AddOBEMarks.aspx" id="lnkAddPLOMarks">Add OBE Marks</a></li>
+                                    <li><a href="../Faculty/ModifyOBEMarks.aspx" id="lnkModifyPLOMarks">Modify OBE Marks</a></li>
+                                    <li><a href="../Faculty/OBE_AddCEPMarks.aspx" id="lnkAddCEP">Add CEP Marks </a></li>
+                                    <li><a href="../Faculty/OBE_ModifyCEPMarks.aspx" id="lnkModifyCEP">Modify CEP Marks </a></li>
+                                    <li><a href="../Faculty/AddOBETargetedCEPWPEA.aspx" id="lnkTargetedCEPWPEA">Add CEP Project Title </a></li>
+                                    <li><a href="../Faculty/CEPFacultyFeedbackForm.aspx" id="lnkCEPFeedback">Add CEP Feedback </a></li>
+
+
+                                    <li><a href="../Faculty/CourseWiseCLO.aspx" id="lnkCLOFaculty" target="_blank">Course
+                                    CLOs </a></li>
+                                    <li><a href="../Faculty/CourseWiseLABCLO.aspx" id="A2" target="_blank">Course LAB
+                                    CLOs</a></li>
+                                    <li><a href="../Faculty/CLOMarksCalculation.aspx" id="lnkCLOMarksFaculty" target="_blank">CLO Claculations </a></li>
+                                    <li><a href="../Faculty/CLOMarksCalculationLab.aspx" id="lnkCLOMarksFacultyLab" target="_blank">CLO Claculations Lab </a></li>
+                                    <li><a href="../Faculty/CourseCLOAchievement.aspx" id="lnkCloAchievement">CLO Achievement</a></li>
+                                    <li><a href="../Faculty/CoursePLOAchievement.aspx" id="lnkPloAchievement">PLO Achievement</a></li>
+                                    <li><a href="../Faculty/OBECourseReview.aspx" id="lnkOBEReview">OBE Review Form</a></li>
+                                    <li><a href="../Faculty/OBECourseReviewCS.aspx" id="lnkOBEReviewCS">OBE Review Form CS</a></li>
+                                    <li><a href="../Faculty/QAMarksDeadLines.aspx" id="A1">Marks Deadlines</a></li>
+                                    <li><a href="../Faculty/ProjectMarksSummary.aspx" id="lnkProjectMarksSummary">
+                                        <img src="../resources/images/icons/new.gif" />
+                                        Project Marks Summary</a></li>
+                                    <li><a href="../Faculty/AddOBEProjectMarks.aspx" id="lnkAddOBEProjectMarks">
+                                        <img src="../resources/images/icons/new.gif" />Add Project Marks</a></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+
+                                </ul>
+                            </li>
+                            <li><a id="lnkMarksReports" class="nav-top-item">Marks Reports</a>
+                                <ul>
+                                    <li><a href="../Faculty/MarksSummary.aspx" id="lnkSummary">Marks Summary</a></li>
+                                    <li><a href="../Faculty/MarksDetail.aspx" id="lnkQuizAssignment" target="_blank">Quiz/Assignment/Labs Marks</a></li>
+                                    
+                                    <li><a href="../Faculty/SessionalAwardList.aspx" id="lnkSessionalAwardListHyb">Pre-Final Award List (Hybrid) </a></li>
+
+                                    <li><a href="../Faculty/SessionalAwardListFA21.aspx" id="lnkSessionalAwardList">Pre-Final Award List</a></li>
+
+                                    <li><a href="../Faculty/MidTerm.aspx" id="LnkMidTerm">Mid Term[Graduate Student] </a></li>
+
+                                    
+                                    <li><a href="../Faculty/FinalAwardList.aspx" id="lnkFinalAwardList">Final Award
+                                    List</a></li>
+
+                                    
+
+                                    
+                                    <li><a href="../Faculty/GradingSummary.aspx?s=2" id="lnkGradingSummaryS2">Grading Summary MidTerm</a></li>
+                                </ul>
+                            </li>
+                            <li><a id="lnk_CoursePortal" class="nav-top-item">Course Portal</a>
+                                <ul>
+                                    <li><a href="../Faculty/Portal/AddAssignment.aspx" id="lnkAddPortalAssignment">Add New Assignment</a></li>
+                                    <li><a href="../Faculty/Portal/PortalSummary.aspx" id="lnkPortalSummary">View/Edit Assignments</a></li>
+                                    
+                                    <li><a href="../Faculty/Portal/AddCourseHelpingMaterial.aspx" id="lnkAddCourseContent">Add Course Aid Material</a></li>
+                                    <li><a href="../Faculty/Portal/CourseContentFilesSummary.aspx" id="lnkContentSummary">View/Edit Course Content</a></li>
+                                    <li><a href="../HOD/Accreditation/CourseData.aspx" id="lnkCourseData">Course Folder</a></li>
+                                    
+                                </ul>
+                            </li>
+
+
+                            <li><a id="lnkMySTudent" class="nav-top-item">My Students</a>
+                                <ul>
+                                    <li><a href="../Faculty/MyStudent1.aspx" id="lnkSelectStudent">Select My Students</a></li>
+                                    <li><a href="../Faculty/CourseDetails.aspx" id="lnkCourseProfile">Student Details
+                                    By Course</a></li>
+                                    <li><a href="../Faculty/AttendanceSheet.aspx" id="lnkStudentAttendance">Student
+                                    Attendance By Course </a></li>
+                                    <li><a href="../Faculty/Marks.aspx" id="lnkStudentMarks">Student Marks By Course
+                                    </a></li>
+                                    <li><a href="../SMS/SendSMSByCourse.aspx" id="lnkSendSMSEmail">Send SMS/Email
+                                    </a></li>
+                                    <li><a href="../faculty/StudentsDetailsCourseWise.aspx" id="lnkStudentsDetails">Students Contact Details
+                                    </a></li>
+                                </ul>
+                            </li>
+                            <li><a id="lnkProjectCommittee" class="nav-top-item">My Projects</a>
+                                <ul>
+                                    <li><a href="ChangeDeadline.aspx" id="lnkFYPDeadline" style="display:none">Marks Entry Deadline</a></li>
+                                    <li></li>
+                                    <li><a href="AddFacultyProjectProposal.aspx" id="lnkAddProposal">Add Project Proposal</a></li>
+                                    <li><a href="ViewFacultyProposals.aspx?type=faculty" id="lnkMyProposals">My Proposals</a></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li><a href="ViewFileTemplates.aspx" id="lnkTemplateDoc">View Doc Templates</a></li>
+                                    <li><a href="ViewFacultyProposals.aspx?type=member" id="lnkDepartmentProposals" style="display:none">Department Proposals </a></li>
+                                    <li><a href="AwardProjectToStudent.aspx" id="lnkAwardProject">Award To Student </a></li>
+                                    <li><a href="ProjectComments.aspx" id="lnkAddTasks">Add Task/Comments </a></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li><a href="AddProjectMarksNonOBE.aspx" id="lnkAddProjectMarks">Add Marks </a></li>
+                                    <li><a href="../Faculty/ProjectMarksSummary.aspx?op=1" id="lnkProjectMarksSummaryNonOBE">Project Marks </a></li>
+                                </ul>
+                            </li>
+
+
+
+
+                            <li id="lstAdvisor"><a id="lnkStudents" class="nav-top-item">Advisor </a>
+                                <ul>
+									            <li>
+                                        <a id="lnkRegularNonRegularStudents" href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$lnkRegularNonRegularStudents&quot;, &quot;&quot;, false, &quot;&quot;, &quot;../Faculty/RegularNonRegularStudents.aspx&quot;, false, true))">Students List</a></li>
+                                    <li>
+                                        <a id="lnk_Sel_Student" href="javascript:__doPostBack(&#39;ctl00$lnk_Sel_Student&#39;,&#39;&#39;)">Select Student</a></li>
+                                    
+                                    <li>
+                                        <a id="lnk_RegisteredCoursesStd" href="javascript:__doPostBack(&#39;ctl00$lnk_RegisteredCoursesStd&#39;,&#39;&#39;)">Students Registered Courses</a></li>
+                                    <li>
+                                        <a id="lnk_Students_Course_Report" href="javascript:__doPostBack(&#39;ctl00$lnk_Students_Course_Report&#39;,&#39;&#39;)">Students Course Report</a></li>
+                                    <li>
+                                        <a id="lnk_Students_Course_Report_SemWise" href="javascript:__doPostBack(&#39;ctl00$lnk_Students_Course_Report_SemWise&#39;,&#39;&#39;)">Students Course Report SemesterWise</a></li>
+                                    <li>
+                                        <a id="lnk_Students_ResultCard" href="javascript:__doPostBack(&#39;ctl00$lnk_Students_ResultCard&#39;,&#39;&#39;)">Students Result Card</a></li>
+                                    <li>
+                                        <a id="lnk_Students_AcademicStatuses" href="javascript:__doPostBack(&#39;ctl00$lnk_Students_AcademicStatuses&#39;,&#39;&#39;)">Students Academic Statuses</a></li>
+                        
+                                    
+                                    <li><a href="../Faculty/AdvisoryComments.aspx" id="lnkAddComments">Advisory
+                                    Comments</a></li>
+                                </ul>
+                            </li>
+
+                            <li id="lstBoardingMain" style="display:none"><a id="lnkBoardingMain" class="nav-top-item">Hostel Management</a>
+                                <ul>
+                                    <li><a href="../Boarding/AddRoom.aspx" id="lnkAddBoardingRoom">Add Room</a></li>
+                                    <li><a href="../Boarding/ManageHostelRooms.aspx" id="lnkEditRoom">View/Edit
+                                    Rooms</a></li>
+                                    <li><a href="../Boarding/AddBoarder.aspx" id="lnkAddBoarder">Add Boarder</a></li>
+                                    <li><a href="../Boarding/BoardingRequests.aspx" id="lnkBoardingRequests">Boarding Requests</a></li>
+                                    <li><a href="../Boarding/AllocateRoom.aspx" id="lnkAllocateBoardingRoom">Allocate/Change Room</a></li>
+                                    <li><a href="../Boarding/BoardersSummary.aspx" id="lnkBoardersSummary">Boarders Summary</a></li>
+                                    <li><a href="../Boarding/Boarders.aspx" id="lnkBoarders">Boarders</a></li>
+                                    <li><a href="../HR/BioMetricAttendnceGirlHostel.aspx" id="lnkBoardingFemale">Girls Hostel Attendance</a></li>
+                                </ul>
+                            </li>
+
+                            <li id="lstDarc">
+                                <ul>
+                                    <li><a href="../Faculty/#" id="lnkDARKMarksSummary">Students
+                                    Marks Summary</a></li>
+                                    <li><a href="../Faculty/#" id="lnkShortattendance">Short Attendance Report</a></li>
+                                    <li><a href="../Faculty/#" id="lnkDarkSessional1">Sessional-1-Grades </a></li>
+                                    <li><a href="../Faculty/#" id="lnkDarkSessional2">Sessional-2-Grades</a></li>
+                                    <li><a href="../Faculty/#" id="lnkTeachersLectureOverview">Teachers Lectures Overview</a></li>
+                                    <li><a href="../Faculty/#" id="lnkscholasticstatus">Scholastic Status</a></li>
+                                    <li><a href="../Faculty/#" id="lnkComments">Comments</a></li>
+                                </ul>
+                            </li>
+                            <li id="lstTimeTable"><a id="lnkTimeTableMain" class="nav-top-item">TimeTable/Date Sheet </a>
+                                <ul>
+                                    <li><a href="../TimeTable/CheckTimeTable.aspx" id="lnkByTeacher">View
+                                    Timetable </a></li>
+                                    <li><a href="../TimeTable/CheckTimeTableByClassWithNoEdit.aspx" id="lnkByCourse">View By Class </a></li>
+                                    <li><a href="../Faculty/RescheduleRequest.aspx" id="lnk_RescheduleRequest">Reschedule Request</a></li>
+                                    <li><a href="../Faculty/ViewRescheduleRequests.aspx" id="lnk_ViewRescheduleRequest">View Reschedule Request</a></li>
+                                    <li><a href="../TimeTable/RescheduledLectures.aspx" id="lnkRescheduledLectures">Reserved Rooms(DOO) </a></li>
+                                    <li><a href="../Faculty/PaperPrintFacultyReservation.aspx" id="lnk_PaperPrintReservation">Reserve Printing Slot</a></li>
+                                    <li><a href="../Faculty/AuditoriumBooking.aspx" id="lnkAuditoriumBooking">Auditorium Booking </a></li>
+
+                                </ul>
+                            </li>
+                            <li id="lstResearchMain"><a id="lnkResearchMain" class="nav-top-item">Research/Supervision </a>
+                                <ul>
+                                    <li><a href="../GraSPP/GraSPPMain.aspx" id="lnkGraduateProgress">Graduate Progress </a></li>
+                                    <li><a href="../GraSPP/Reports/SupervisedStudentsForTeacher.aspx" id="lnkSupervisedStudents">Supervised Students</a></li>
+                                    <li><a href="../Research/FacultyPublicationSummary.aspx" id="lnkFacultySummary">My Publications Summary</a></li>
+                                    <li><a href="../Research/FacultyPublicationList1.aspx" id="lnkFacultyList">My Publications List</a></li>
+                                    <li><a href="../Research/DuplicatePublications.aspx" id="lnkDuplicatePublications">Duplicate Publications List</a></li>
+                                    <li><a href="../Research/ResearchAwardScore.aspx" id="lnkDeptAwardScore">Dept Award Score</a></li>
+                                    <li><a href="../Research/DepartmentPublicationSummary.aspx" id="lnkDepartmentSummary">Department Summary </a></li>
+                                    <li><a href="../Research/DepartmentResearchersPublicationSummary.aspx" id="lnkDepartmentResearchers">Department Researchers</a></li>
+                                    <li><a href="../Research/CampusPublicationSummary.aspx" id="lnkCampusSummary">Campus Summary </a></li>
+                                    <li><a href="../Research/ResearchersPublicationSummary.aspx" id="lnkCIITResearchers">CIIT Researchers</a></li>
+                                </ul>
+                            </li>
+
+                            <li><a id="lnkHRMain" class="nav-top-item">HR/Library</a>
+                                <ul>
+                                    <li><a href="../HR/EmployeePersonalDetails.aspx" id="lnkPersonalDetails">Personal Details</a></li>
+                                    <li><a href="../HR/DailyAttendance.aspx" id="lnkDailyAttendance">Daily
+                                    Attendance</a></li>
+                                    <li id="lstMonitorAttendance" style="display:none"><a href="../HR/MonitorAttendance.aspx" id="lnkMonitorAttendance">Monitor Attendance</a></li>
+                                    <li id="lstConsolidated" style="display:none"><a href="../HR/ConsolidatedAttendance.aspx" id="lnkConsolidated">Consolidated Attendance</a></li>
+                                    <li id="lstAppyforLeave"><a href="../HR/ApplyForLeave.aspx" id="lnkApplyForLeave">Apply For Leave</a></li>
+                                    <li><a href="../HR/EmployeeLeaveDetails.aspx" id="lnkLeaveHistory">Leave
+                                    History</a></li>
+                                    <li id="lstMonitorLeaves" style="display:none"><a href="../HR/EmployeeLeaveHistory.aspx" id="lnkMonitorLeaves">Monitor Leave History </a></li>
+                                    <li id="lstApprove" style="display:none"><a href="../HR/ApproveApplications.aspx" id="lnkApprove">Approve/Reject Leave </a></li>
+                                    <li id="liLeaveApplicationFor" style="display:none"><a href="../HR/ApplyForLeaveAsFor.aspx" id="lnkLeaveApplicationFor">Leave Appy on Behlaf of</a></li>
+
+                                    <li id="liBioMetricAttendance" style="display:none"><a href="../HR/BulkBioMetricAttendance.aspx" id="lnkBioMetricAttendance">Bulk Leave Update(Semester Beark) </a></li>
+
+                                    <li id="lstApplicationHistory" style="display:none"><a href="../HR/ApplicationHistory.aspx" id="lnkApplicationHistory">Application History  </a></li>
+                                    <li><a href="../Library/ReservedBooks.aspx" id="lnkReserveBook">Book Reservation</a></li>
+                                    <li><a href="../Library/BookRequisitions.aspx" id="lnkBookRequisitions">Book Requisition</a></li>
+                                    <li><a href="../Library/BookIssueHistory.aspx" id="lnkBookBorrowHistory">Book Borrow History</a></li>
+
+                                </ul>
+                            </li>
+
+                            
+
+
+                            
+
+                            
+
+
+                            <li>
+                                <ul>
+                                    <li>
+                                        
+                                    </li>
+                                </ul>
+                            </li>
+
+
+                            
+
+
+
+
+
+                            
+
+                            
+
+
+
+                            <li id="lstLoanCard"><a id="lnkLoanCard" class="nav-top-item">Loan Card (Store) </a>
+                                <ul>
+                                    <li>
+                                        <a href="../PMS/rptPersonalReportStoreIssue.aspx" id="lnkLoanCardItemIssue">Personal Loan Card </a>
+                                    </li>
+
+                                </ul>
+                            </li>
+
+
+
+                            
+
+
+                            <li><a id="lnkEmployeePMSMenu" class="nav-top-item">Employee Purchase Reports
+                            </a>
+                                <ul>
+                                    <li>
+                                        <a id="lnkrptRequisitionReportPersonal_F1" href="javascript:__doPostBack(&#39;ctl00$lnkrptRequisitionReportPersonal_F1&#39;,&#39;&#39;)">Personal Purchase Cases Status</a>
+                                    </li>
+
+                                   
+                                </ul>
+                            </li>
+
+
+
+                            
+
+
+
+
+
+
+                            
+                            <li><a id="lnkFacultyArchive" class="nav-top-item">Faculty Archive</a>
+                                <ul>
+                                    <li><a href="../Faculty/LecturesOverviewArchive.aspx" id="lnkLectureArchive">Lecture Archive</a></li>
+                                    <li><a href="../Faculty/AttendanceOverViewArchive.aspx" id="lnkAttendanceOverviewArch">Attendance Archive</a></li>
+                                    <li><a href="../Faculty/MarksSummaryArchieve.aspx" id="lnkMarksArchive">Marks Archive</a></li>
+                                    <li><a href="../Faculty/FinalAwardListArchive.aspx" id="lnkFinalAwardListArchive">Final Award List Archive</a></li>
+                                    <li><a href="../Faculty/Portal/CourseContentFilesSummary.aspx?archive=1" id="lnkPortalArchive">Course Portal Archive</a></li>
+                                    <li><a href="../Faculty/FeedBack.aspx" id="lnkFeedbackArchive">Feedback
+                                    Archive</a></li>
+                                </ul>
+                            </li>
+                            <li><a id="lnk_Settings" class="nav-top-item">Settings</a>
+                                <ul>
+                                    <li><a href="../ChangePassword.aspx" id="lnkChangePassword">Change Password</a></li>
+                                    <li><a href="../MobileAppActivation.aspx" id="lnkMobAppActivation">Activate CUonline Mobile App</a></li>
+
+                                    <li><a href="../LoginHistory.aspx" id="lnkLoginHistory">Login History</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <!-- End #main-nav -->
+                        <!-- End #messages -->
+                    </div>
+                </div>
+                <!-- End #sidebar -->
+                <div id="main-content">
+                    <!-- Main Content Section with everything -->
+                    <noscript>
+                        <!-- Show a notification if the user has disabled javascript -->
+                        <div class="notification error png_bg">
+                            <div>
+                                Javascript is disabled or is not supported by your browser. Please <a href="http://browsehappy.com/"
+                                    title="Upgrade to a better browser">upgrade</a> your browser or <a href="http://www.google.com/support/bin/answer.py?answer=23852"
+                                        title="Enable Javascript in your browser">enable</a> Javascript to navigate
+                            the interface properly.
+                            </div>
+                        </div>
+                    </noscript>
+                    <!-- Page Head -->
+                    <div class="clear">
+                    </div>
+                    &nbsp;<div class="content-box">
+                        <!-- Start Content Box -->
+                        <div class="content-box-header">
+                            <h3>
+                                
+
+                            </h3>
+                        </div>
+                        <!-- End .content-box-header -->
+                        <div class="content-box-content">
+                            
+
+                        </div>
+                        <!-- End .content-box-content -->
+                    </div>
+                    <!-- End .content-box -->
+                    <div class="clear">
+                    </div>
+                    <div id="footer">
+                        <small>© Copyright 
+                             <span id="copyright">
+                                 <script>document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))</script>
+                             </span>
+                            <span lang="en-us">COMSATS University Islamabad, Abbottabad Campus </span>| Powered by <a target="_blank" href="https://www.cuiatd.edu.pk/about/centers-academies/comsats-it-center/">CITC</a> | <a href="#">Top</a> </small>
+                    </div>
+                    <!-- End #footer -->
+                </div>
+                <!-- End #main-content -->
+            </div>
+        </div>
+    </form>
+</body>
+</html>
